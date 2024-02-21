@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1056972719660",
+    "project_id": "car-dealer-app-development",
+    "storage_bucket": "car-dealer-app-development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056972719660:android:00bc844225d02146c7f389",
+        "android_client_info": {
+          "package_name": "com.lemontreetech.lambikestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056972719660-ti1hi89simkqo0o3dht8din6tp8rug2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN5SX5-g1ntUzoAR5uM89EnmuLM2XKlJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056972719660-ti1hi89simkqo0o3dht8din6tp8rug2l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1056972719660-d637ms3prc4v2hpk8sjjm6uvtncpiu9l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lemontreetech.lambikestore"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056972719660:android:56e22d741f176c55c7f389",
+        "android_client_info": {
+          "package_name": "com.lt.motordealerphotodrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056972719660-ti1hi89simkqo0o3dht8din6tp8rug2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN5SX5-g1ntUzoAR5uM89EnmuLM2XKlJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056972719660-ti1hi89simkqo0o3dht8din6tp8rug2l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1056972719660-d637ms3prc4v2hpk8sjjm6uvtncpiu9l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lemontreetech.lambikestore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
