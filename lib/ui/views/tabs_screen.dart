@@ -67,7 +67,7 @@ class _TabsSreenState extends State<TabsSreen>
   //   setState(() {
   //     _isLoadingImageAsstes = false;
   //   });
-
+  //    print(image)
   //   if (imageBytes.isNotEmpty) {
   //     Navigator.of(context).pushNamed(
   //       AddImagesScreen.routeName,

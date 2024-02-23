@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../shared/sliver_loading_indicator.dart';
-// import '../../shared/sliver_grid_images.dart';
-// import '../../../locator.dart';
+import '../../shared/sliver_grid_images.dart';
+import '../../../locator.dart';
 
 class RecentScreen extends StatefulWidget {
   const RecentScreen({super.key});
@@ -12,14 +12,14 @@ class RecentScreen extends StatefulWidget {
 }
 
 class _RecentScreenState extends State<RecentScreen> {
-  // final RecentViewModel _recentViewModel = locator<RecentViewModel>();
+  final RecentViewModel _recentViewModel = locator<RecentViewModel>();
   bool isLoading = false;
 
   Future<void> _refresh() async {
     setState(() {
       isLoading = true;
     });
-    // await _recentViewModel.refresh();
+    await _recentViewModel.refresh();
     if (mounted) {
       setState(() {
         isLoading = false;
@@ -27,13 +27,13 @@ class _RecentScreenState extends State<RecentScreen> {
     }
   }
 
-  // @override
-  // void initState() {
-  //   if (_recentViewModel.dataClean == false) {
-  //     Future.delayed(Duration.zero, _refresh); // load the first ten
-  //   }
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    if (_recentViewModel.dataClean == false) {
+      Future.delayed(Duration.zero, _refresh); // load the first ten
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _RecentScreenState extends State<RecentScreen> {
       child: CustomScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
-          // SliverGridImages(recentImages: _recentViewModel.recentImages),
+          SliverGridImages(recentImages: _recentViewModel.recentImages),
           isLoading == false
               ? SliverToBoxAdapter(
                   child: Container(
