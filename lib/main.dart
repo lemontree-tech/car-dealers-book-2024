@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'ui/views/tabs_screen.dart';
 import './firebase_options.dart';
 import 'locator.dart';
-
+import 'ui/views/splash_screen.dart';
+import 'ui/views/auth_screen.dart';
 
 Future<void> main() async {
-WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -22,13 +23,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       debugShowCheckedModeBanner: false,
       title: "Car Gallery",
       theme: ThemeData(
+        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        // useMaterial3: false,
       ),
-      home: const TabsSreen(),
+      home: StreamBuilder(
+          stream: locator<AuthService>().stream,
+          builder: (ctx, snapShot) {
+            if (snapShot.connectionState == ConnectionState.waiting) {
+              return const SplashScreen();
+            }
+            if (snapShot.hasData) {
+              return const TabsSreen();
+            }
+            return const AuthScreen();
+            // return const Text("auth page");
+          }),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-// import '../../locator.dart';
-// import '../shared/confirm_action_dialog.dart';
+import '../../locator.dart';
+import '../shared/confirm_action_dialog.dart';
 // import './list_all_zips_view.dart';
 
 class SettingDrawer extends StatefulWidget {
@@ -12,7 +12,7 @@ class SettingDrawer extends StatefulWidget {
 }
 
 class _SettingDrawerState extends State<SettingDrawer> {
-  // final SettingViewModel _settingViewModel = locator<SettingViewModel>();
+  final SettingViewModel _settingViewModel = locator<SettingViewModel>();
   bool isLoading = false;
 
 
@@ -45,13 +45,13 @@ class _SettingDrawerState extends State<SettingDrawer> {
           ),
           ListTile(
             onTap: () async {
-              // final doLogout = await confirmActionDialog(
-              //   context,
-              //   title: '確認登出',
-              // );
-              // if (doLogout == true) {
-              //   // await _settingViewModel.logout();
-              // }
+              final doLogout = await confirmActionDialog(
+                context,
+                title: '確認登出',
+              );
+              if (doLogout == true) {
+                await _settingViewModel.logout();
+              }
             },
             leading: const Icon(Icons.message),
             title: const Text('登出'),
