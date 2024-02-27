@@ -43,14 +43,11 @@ class GridImage extends StatelessWidget {
                 image: DecorationImage(
                   image: imageProvider,
                   fit: BoxFit.cover,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.red,
-                    BlendMode.colorBurn,
-                  ),
                 ),
               ),
             ),
-            placeholder: (context, url) => const CircularProgressIndicator(),
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator.adaptive()),
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
