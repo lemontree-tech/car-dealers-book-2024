@@ -4,7 +4,6 @@ class AuthForm extends StatefulWidget {
   final void Function(
     String email,
     String password,
-    BuildContext ctx,
   ) _loginFuntion;
 
   final bool _isLoading;
@@ -27,7 +26,6 @@ class _AuthFormState extends State<AuthForm> {
       widget._loginFuntion(
         email.trim(),
         password.trim(),
-        context,
       );
     }
 

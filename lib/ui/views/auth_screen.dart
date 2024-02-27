@@ -20,7 +20,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final _authService = locator<AuthService>();
   var _isLoading = false;
 
-  void _login(String email, String password, BuildContext ctx) async {
+  void _login(String email, String password) async {
     try {
       setState(() {
         _isLoading = true;
