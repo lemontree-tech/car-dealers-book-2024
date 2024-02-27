@@ -28,23 +28,23 @@ class _AuthScreenState extends State<AuthScreen> {
 
       await _authService.login(email: email, password: password);
     } on PlatformException catch (error) {
-      var msg = "Login Failed.";
       inspect(error);
-      if (error.message != null) {
-        msg = error.message!;
+    } catch (error) {
+      var msg = "Login Failed.";
+      // if ((error != null) {
+      msg = error.toString();
+      // }
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-        // ignore: use_build_context_synchronously
-        (ScaffoldMessenger.of(ctx)..hideCurrentSnackBar()).showSnackBar(
-          SnackBar(
-            content: Text(msg),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } catch (err) {
-      if (kDebugMode) {
-        print(err);
-      }
+      // Then, show the new snack bar.
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(msg),
+          backgroundColor: Colors.red,
+        ),
+      );
     } finally {
       if (mounted) {
         setState(() {
