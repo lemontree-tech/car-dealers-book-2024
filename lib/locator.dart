@@ -13,7 +13,7 @@ import 'core/services/database_service.dart';
 import 'core/viewmodels/setting_view_model.dart';
 import 'core/viewmodels/recent_view_model.dart';
 // import 'core/viewmodels/by_date_view_model.dart';
-// import 'core/viewmodels/add_images_view_model.dart';
+import 'core/viewmodels/add_images_view_model.dart';
 // import 'core/viewmodels/by_date_detail_view_model.dart';
 // import 'core/viewmodels/search_result_view_model.dart';
 // import 'core/viewmodels/image_detail_view_model.dart';
@@ -30,7 +30,7 @@ export 'core/services/database_service.dart';
 export 'core/viewmodels/setting_view_model.dart';
 export 'core/viewmodels/recent_view_model.dart';
 // export 'core/viewmodels/by_date_view_model.dart';
-// export 'core/viewmodels/add_images_view_model.dart';
+export 'core/viewmodels/add_images_view_model.dart';
 // export 'core/viewmodels/by_date_detail_view_model.dart';
 // export 'core/viewmodels/search_result_view_model.dart';
 // export 'core/viewmodels/image_detail_view_model.dart';
@@ -52,7 +52,7 @@ void setupLocator() {
   locator.registerLazySingleton<SettingViewModel>(() => SettingViewModel());
   locator.registerLazySingleton<RecentViewModel>(() => RecentViewModel());
   // locator.registerLazySingleton<ByDateViewModel>(() => ByDateViewModel());
-  // locator.registerLazySingleton<AddImagesViewModel>(() => AddImagesViewModel());
+  locator.registerLazySingleton<AddImagesViewModel>(() => AddImagesViewModel());
   // locator.registerLazySingleton<ByDateDetailViewModel>(
   //     () => ByDateDetailViewModel());
   // locator.registerLazySingleton<SearchResultViewModel>(

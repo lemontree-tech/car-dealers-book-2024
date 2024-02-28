@@ -1,15 +1,18 @@
 // import 'dart:io';
 // import 'dart:typed_data';
 
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'tabs/recent_screen.dart';
 import 'tabs/by_date_view.dart';
 import 'tabs/search_screen.dart';
-// import './add_images_screen.dart';
+import './add_images_screen.dart';
 import './setting_drawer.dart';
 // import '../shared/messages/get_new_text_dialog.dart';
-// import '../../utils/image_picker_from_phone.dart';
+import '../../utils/image_picker_from_phone.dart';
 // import '../../locator.dart';
 
 class TabsSreen extends StatefulWidget {
@@ -33,7 +36,7 @@ class _TabsSreenState extends State<TabsSreen>
       TextEditingController();
   // final SearchResultViewModel _searchResultViewModel =
   //     locator<SearchResultViewModel>();
-  final _isLoadingImageAsstes = false;
+  var _isLoadingImageAsstes = false;
 
   @override
   void initState() {
@@ -52,29 +55,32 @@ class _TabsSreenState extends State<TabsSreen>
     super.dispose();
   }
 
-  // Future<void> addNewImage(BuildContext context, {isCamera = false}) async {
-  //   // List<Asset> imageAssets = await loadAssets();
-  //   File imageFile = await loadAsset(isCamera: isCamera);
-  //   if (!mounted) return;
-  //   List<Uint8List> imageBytes = [];
+  Future<void> addNewImage(BuildContext context,
+      {bool isCamera = false}) async {
+    File? imageFile = await loadAsset(isCamera: isCamera);
+    if (!mounted) return;
+    List<Uint8List> imageBytes = [];
 
-  //   setState(() {
-  //     _isLoadingImageAsstes = true;
-  //   });
+    setState(() {
+      _isLoadingImageAsstes = true;
+    });
 
-  //   imageBytes.add(loadImageFromFile(imageFile));
+    if (imageFile != null) {
+      imageBytes.add(loadImageFromFile(imageFile));
+    }
 
-  //   setState(() {
-  //     _isLoadingImageAsstes = false;
-  //   });
-  //    print(image)
-  //   if (imageBytes.isNotEmpty) {
-  //     Navigator.of(context).pushNamed(
-  //       AddImagesScreen.routeName,
-  //       arguments: imageBytes,
-  //     );
-  //   }
-  // }
+    setState(() {
+      _isLoadingImageAsstes = false;
+    });
+    debugPrint(imageFile?.path.toString());
+    if (imageBytes.isNotEmpty) {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushNamed(
+        AddImagesScreen.routeName,
+        arguments: imageBytes,
+      );
+    }
+  }
 
   // Future<void> makeNewSearch(BuildContext context) async {
   //   final searchString = await getNewTextDialog(context, _searchTextController,
@@ -115,20 +121,20 @@ class _TabsSreenState extends State<TabsSreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FloatingActionButton(
-                      heroTag: 'btn1',
-                      child: const Icon(Icons.camera_alt),
-                      onPressed: () async =>
-                          // await addNewImage(context, isCamera: true),
-                          {}),
+                    heroTag: 'btn1',
+                    child: const Icon(Icons.camera_alt),
+                    onPressed: () async =>
+                        await addNewImage(context, isCamera: true),
+                  ),
                   const SizedBox(
                     width: 20,
                   ),
                   FloatingActionButton(
-                      heroTag: 'btn2',
-                      child: const Icon(Icons.image),
-                      onPressed: () async =>
-                          // await addNewImage(context, isCamera: false),
-                          {}),
+                    heroTag: 'btn2',
+                    child: const Icon(Icons.image),
+                    onPressed: () async =>
+                        await addNewImage(context, isCamera: false),
+                  ),
                 ],
               )
             : _tabController.index == 2

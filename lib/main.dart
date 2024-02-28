@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'ui/views/tabs_screen.dart';
 import './firebase_options.dart';
-import 'locator.dart';
+import 'ui/views/tabs_screen.dart';
+import 'ui/views/add_images_screen.dart';
 import 'ui/views/splash_screen.dart';
 import 'ui/views/auth_screen.dart';
+import 'locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
             return const AuthScreen();
             // return const Text("auth page");
           }),
+      routes: {
+          AddImagesScreen.routeName: (ctx) => AddImagesScreen(),
+      },
     );
   }
 }
