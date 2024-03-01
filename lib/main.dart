@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
           }),
       routes: {
           AddImagesScreen.routeName: (ctx) => AddImagesScreen(),
+          // ImageDetailScreen.routeName: (ctx) => ImageDetailScreen(),
       },
     );
   }
