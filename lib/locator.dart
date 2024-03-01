@@ -44,6 +44,8 @@ void setupLocator() {
   locator
       .registerLazySingleton<CloudStorageService>(() => CloudStorageService());
   locator.registerLazySingleton<DataBaseService>(() => DataBaseService());
+
+
   // locator
   //     .registerLazySingleton<LocalStorageService>(() => LocalStorageService());
   // locator.registerLazySingleton<GlobalService>(() => GlobalService());
