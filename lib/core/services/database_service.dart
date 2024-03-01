@@ -98,59 +98,63 @@ class DataBaseService {
     required String pic,
     required DateTime date,
   }) async {
-    _markDirty();
+    return;
 
-    final Map<String, dynamic> data = {
-      "image_id": imageId,
-      "image_name": imageName,
-      "image_url": imageUrl,
-      "license": license,
-      "pic": pic,
-      "search_array": _getSearchArray(imageName) + _getSearchArray(license),
-      "date": Timestamp.fromDate(date),
-      "created_at": Timestamp.now(),
-      'deleted': false,
-    };
+    // _markDirty();
 
-    try {
-      // Try to upload info to Firestore
-      await FirebaseFirestore.instance
-          .collection('images')
-          .doc(imageId) // Updated from .document(imageId)
-          .set(data);
-    } catch (err) {
-      await FirebaseFirestore.instance
-          .collection('images')
-          .doc(imageId) // Updated from .document(imageId)
-          .set({'deleted': true});
-      rethrow;
-    }
+    // final Map<String, dynamic> data = {
+    //   "image_id": imageId,
+    //   "image_name": imageName,
+    //   "image_url": imageUrl,
+    //   "license": license,
+    //   "pic": pic,
+    //   "search_array": _getSearchArray(imageName) + _getSearchArray(license),
+    //   "date": Timestamp.fromDate(date),
+    //   "created_at": Timestamp.now(),
+    //   'deleted': false,
+    // };
+
+    // try {
+    //   // Try to upload info to Firestore
+    //   await FirebaseFirestore.instance
+    //       .collection('images')
+    //       .doc(imageId) // Updated from .document(imageId)
+    //       .set(data);
+    // } catch (err) {
+    //   await FirebaseFirestore.instance
+    //       .collection('images')
+    //       .doc(imageId) // Updated from .document(imageId)
+    //       .set({'deleted': true});
+    //   rethrow;
+    // }
   }
 
   Future<void> editImage(ImageItem image) async {
-    _markDirty();
-    final data = {
-      'image_name': image.imageName,
-      'license': image.license,
-      'pic': image.pic,
-      'date': Timestamp.fromDate(image.date),
-      'search_array':
-          _getSearchArray(image.imageName) + _getSearchArray(image.license),
-    };
-    await FirebaseFirestore.instance
-        .collection('images')
-        .doc(image.id) // Updated from .document(image.id)
-        .update(data); // Updated from .updateData(data)
+    return ;
+    // _markDirty();
+    // final data = {
+    //   'image_name': image.imageName,
+    //   'license': image.license,
+    //   'pic': image.pic,
+    //   'date': Timestamp.fromDate(image.date),
+    //   'search_array':
+    //       _getSearchArray(image.imageName) + _getSearchArray(image.license),
+    // };
+    // await FirebaseFirestore.instance
+    //     .collection('images')
+    //     .doc(image.id) // Updated from .document(image.id)
+    //     .update(data); // Updated from .updateData(data)
   }
 
   Future<void> deleteImageById(String imageId) async {
-    _markDirty();
-    await FirebaseFirestore.instance
-        .collection('images')
-        .doc(imageId) // Updated from .document(imageId)
-        .set({
-      'deleted': true
-    }); // Kept as .set() since you're setting 'deleted' to true
+    return ;
+  //   _markDirty();
+  //   await FirebaseFirestore.instance
+  //       .collection('images')
+  //       .doc(imageId) // Updated from .document(imageId)
+  //       .set({
+  //     'deleted': true
+  //   }); // Kept as .set() since you're setting 'deleted' to true
   }
 
   void _markDirty() {
