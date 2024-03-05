@@ -5,6 +5,7 @@ import 'ui/views/tabs_screen.dart';
 import 'ui/views/add_images_screen.dart';
 import 'ui/views/splash_screen.dart';
 import 'ui/views/auth_screen.dart';
+import 'ui/views/image_detail_screen.dart';
 import 'locator.dart';
 
 Future<void> main() async {
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
           }),
       routes: {
           AddImagesScreen.routeName: (ctx) => AddImagesScreen(),
-          // ImageDetailScreen.routeName: (ctx) => ImageDetailScreen(),
+          ImageDetailScreen.routeName: (ctx) => ImageDetailScreen(),
       },
     );
   }

@@ -1,20 +1,28 @@
+// the string interpretation inside text{}, name_id is not useful anymore
+
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 // import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart'; // plus: global search: flutter_datetime_picker_plus
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'; // plus: global search: flutter_datetime_picker_plus
 import 'package:intl/intl.dart';
 
 import '../shared/messages/get_new_text_dialog.dart';
 import '../shared/confirm_action_dialog.dart';
-import '../shared/efficient_network_image.dart'; // cached_network_image: global search
-// import '../../utils/image_downloader.dart';
+import 'package:cached_network_image/cached_network_image.dart'; // cached_network_image: global search
+import '../../utils/image_downloader.dart';
 import '../../core/models/image.dart';
 // import '../../locator.dart';
 
-class ImageDetailScreen extends StatefulWidget { // quick fix
+class ImageDetailScreen extends StatefulWidget {
+  // quick fix
   static const routeName = 'image-detail';
 
+  const ImageDetailScreen({super.key});
+
   @override
-  _ImageDetailScreenState createState() => _ImageDetailScreenState(); // copy: State<ImageDetailScreen>
+  State<ImageDetailScreen> createState() =>
+      _ImageDetailScreenState(); // copy: State<ImageDetailScreen>
 }
 
 class _ImageDetailScreenState extends State<ImageDetailScreen> {
@@ -23,7 +31,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
 
   final DateFormat _formatter = DateFormat('yyyy-MM-dd');
 
-  final TextEditingController _editingController = new TextEditingController();
+  // final TextEditingController _editingController = new TextEditingController();
 
   // Future<bool> confirmDelete(BuildContext context) async {
   //   return await hardConfirmActionDialog(context, confirmString: 'delete');
@@ -114,7 +122,8 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final image = ModalRoute.of(context).settings.arguments as ImageItem; // global search: ModalRoute / null safty issue
+    final image = ModalRoute.of(context)!.settings.arguments
+        as ImageItem; // global search: ModalRoute / null safty issue
     final String imagePath = image.id;
     final String imageId = image.id;
     final String license = image.license;
@@ -128,9 +137,9 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
         title: Text(imageName),
         actions: [
           IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () async => await deleteAndPop(context, imageId), // comment out, empty function (){}
-          ),
+              icon: const Icon(Icons.delete),
+              // onPressed: () async => await deleteAndPop(context, imageId), // comment out, empty function (){}
+              onPressed: () {}),
         ],
       ),
       body: CustomScrollView(
@@ -139,15 +148,16 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.4,
               alignment: Alignment.center,
-              child: EfficientNetworkImage( // cached_network_image: global search
+              child: CachedNetworkImage(
+                // cached_network_image: global search
                 key: UniqueKey(),
-                imageId: imagePath,
+                // imageId: imagePath,
                 imageUrl: imageUrl,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-          SliverToBoxAdapter(child: Divider()), // quick fix
+          const SliverToBoxAdapter(child: Divider()), // quick fix
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -166,68 +176,71 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
                       TableRow(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.edit), // quick fix
-                            onPressed: () async =>
-                                await editName(context, image), // comment out, empty function (){}
-                          ),
+                              icon: const Icon(Icons.edit), // quick fix
+                              // onPressed: () async =>
+                              //     await editName(context, image), // comment out, empty function (){}
+                              onPressed: () {}),
                           Text(
                             "名稱:",
-                            style: Theme.of(context).textTheme.headline5, 
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
-                            "$imageName",
-                            style: Theme.of(context).textTheme.headline5,
+                            imageName,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ],
                       ),
                       TableRow(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () async =>
-                                await editLicense(context, image), // comment out, empty function (){}
+                            icon: const Icon(Icons.edit),
+                            // onPressed: () async =>
+                            //     await editLicense(context, image), // comment out, empty function (){}
+                            onPressed: () {},
                           ),
-                          Text(
+                          const Text(
                             "車牌號碼:",
-                            style: Theme.of(context).textTheme.headline5,
+                            // style: Theme.of(context).textTheme.headline5,
                           ),
                           Text(
-                            "${license != null ? license : '不適用'}",
-                            style: Theme.of(context).textTheme.headline5,
+                            license.isEmpty ? '不適用' : license,
+                            // style: Theme.of(context).textTheme.headline5,
                           ),
                         ],
                       ),
                       TableRow(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () async =>
-                                await editPic(context, image),
+                            icon: const Icon(Icons.edit),
+                            // onPressed: () async =>
+                            //     await editPic(context, image),
+                            onPressed: () {},
                           ),
-                          Text(
+                          const Text(
                             "負責人:",
-                            style: Theme.of(context).textTheme.headline5,
+                            // style: Theme.of(context).textTheme.headline5,
                           ),
                           Text(
-                            "${pic != null ? pic : '不適用'}",
-                            style: Theme.of(context).textTheme.headline5,
+                            pic.isNotEmpty ? pic : '不適用',
+                            // style: Theme.of(context).textTheme.headline5,
                           ),
                         ],
                       ),
                       TableRow(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () async =>
-                                await editDate(context, image),
+                            icon: const Icon(Icons.edit),
+                            // onPressed: () async =>
+                            //     await editDate(context, image),
+                            onPressed: () {},
                           ),
                           Text(
                             "日期:",
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
-                            "${_formatter.format(date)}",
-                            style: Theme.of(context).textTheme.headline5,
+                            _formatter.format(date),
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ],
                       ),
@@ -249,11 +262,13 @@ class StatefulDownloadRaisedButton extends StatefulWidget {
   final _imageUrl;
   final _imageId;
 
-  const StatefulDownloadRaisedButton(this._imageUrl, this._imageId);
+  const StatefulDownloadRaisedButton(this._imageUrl, this._imageId,
+      {super.key});
 
   @override
-  _StatefulDownloadRaisedButtonState createState() => // State<StatefulDownloadRaisedButton>
-      _StatefulDownloadRaisedButtonState();
+  State<StatefulDownloadRaisedButton>
+      createState() => // State<StatefulDownloadRaisedButton>
+          _StatefulDownloadRaisedButtonState();
 }
 
 class _StatefulDownloadRaisedButtonState
@@ -268,7 +283,7 @@ class _StatefulDownloadRaisedButtonState
   @override
   Widget build(BuildContext context) {
     return _isDownloading
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : ElevatedButton.icon(
             onPressed: () async {
               if (await confirmDownload(context)) {
@@ -281,8 +296,8 @@ class _StatefulDownloadRaisedButtonState
                 });
               }
             },
-            icon: Icon(Icons.download_rounded),
-            label: Text("下載到手機"),
+            icon: const Icon(Icons.download_rounded),
+            label: const Text("下載到手機"),
           );
   }
 }
