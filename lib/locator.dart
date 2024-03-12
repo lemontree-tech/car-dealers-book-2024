@@ -12,9 +12,9 @@ import 'core/services/cloud_storage_service.dart';
 // ********* Models *********************
 import 'core/viewmodels/setting_view_model.dart';
 import 'core/viewmodels/recent_view_model.dart';
-// import 'core/viewmodels/by_date_view_model.dart';
+import 'core/viewmodels/by_date_view_model.dart';
 import 'core/viewmodels/add_images_view_model.dart';
-// import 'core/viewmodels/by_date_detail_view_model.dart';
+import 'core/viewmodels/by_date_detail_view_model.dart';
 // import 'core/viewmodels/search_result_view_model.dart';
 // import 'core/viewmodels/image_detail_view_model.dart';
 // import 'core/viewmodels/list_all_zips_view_model.dart';
@@ -29,9 +29,9 @@ export 'core/services/database_service.dart';
 // ********** Export Models ************
 export 'core/viewmodels/setting_view_model.dart';
 export 'core/viewmodels/recent_view_model.dart';
-// export 'core/viewmodels/by_date_view_model.dart';
+export 'core/viewmodels/by_date_view_model.dart';
 export 'core/viewmodels/add_images_view_model.dart';
-// export 'core/viewmodels/by_date_detail_view_model.dart';
+export 'core/viewmodels/by_date_detail_view_model.dart';
 // export 'core/viewmodels/search_result_view_model.dart';
 // export 'core/viewmodels/image_detail_view_model.dart';
 // export 'core/viewmodels/list_all_zips_view_model.dart';
@@ -53,10 +53,10 @@ void setupLocator() {
   // models
   locator.registerLazySingleton<SettingViewModel>(() => SettingViewModel());
   locator.registerLazySingleton<RecentViewModel>(() => RecentViewModel());
-  // locator.registerLazySingleton<ByDateViewModel>(() => ByDateViewModel());
+  locator.registerLazySingleton<ByDateViewModel>(() => ByDateViewModel());
   locator.registerLazySingleton<AddImagesViewModel>(() => AddImagesViewModel());
-  // locator.registerLazySingleton<ByDateDetailViewModel>(
-  //     () => ByDateDetailViewModel());
+  locator.registerLazySingleton<ByDateDetailViewModel>(
+      () => ByDateDetailViewModel());
   // locator.registerLazySingleton<SearchResultViewModel>(
   //     () => SearchResultViewModel());
   // locator.registerLazySingleton<ImageDetailViewModel>(

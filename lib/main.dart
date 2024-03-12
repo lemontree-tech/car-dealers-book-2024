@@ -6,6 +6,8 @@ import 'ui/views/add_images_screen.dart';
 import 'ui/views/splash_screen.dart';
 import 'ui/views/auth_screen.dart';
 import 'ui/views/image_detail_screen.dart';
+import 'ui/views/by_date_detail_view.dart';
+
 import 'locator.dart';
 
 Future<void> main() async {
@@ -44,8 +46,10 @@ class MyApp extends StatelessWidget {
             // return const Text("auth page");
           }),
       routes: {
-          AddImagesScreen.routeName: (ctx) => AddImagesScreen(),
-          ImageDetailScreen.routeName: (ctx) => ImageDetailScreen(),
+          AddImagesScreen.routeName: (ctx) => const AddImagesScreen(),
+          ImageDetailScreen.routeName: (ctx) => const ImageDetailScreen(),
+          ByDateDetailView.routeName: (ctx) => const ByDateDetailView(),
+
       },
     );
   }
