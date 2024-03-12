@@ -8,6 +8,8 @@ import '../shared/messages/error_dialog.dart';
 class AddImagesScreen extends StatelessWidget {
   static const routeName = "add-images";
 
+  const AddImagesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final List<Uint8List> images = ModalRoute.of(context)!.settings.arguments as List<Uint8List>;
