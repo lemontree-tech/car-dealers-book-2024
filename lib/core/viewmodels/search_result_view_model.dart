@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -15,20 +17,25 @@ class SearchResultViewModel extends ChangeNotifier {
   }
 
   Future<bool> newSearch(String searchString) async {
+    debugPrint("newSearch: $searchString");
     try {
-      List<ImageItem> _photoList;
+      List<ImageItem> photoList;
       final snapshot = await FirebaseFirestore.instance
           .collection('images')
           .where('search_array', arrayContains: searchString)
+          .limit(100)
           .get();
-      _photoList = snapshot.docs
+
+      debugPrint("snapshot.docs.length: ${snapshot.docs.length}");
+      photoList = snapshot.docs
           .map((document) => ImageItem.fromApiJson(document.data()))
           .toList();
-      _searchResults = _photoList;
-      notifyListeners();
+      _searchResults = photoList;
+      print(_searchResults.length);
+      // notifyListeners();
       return true;
     } catch (err) {
-      print(err);
+      print("==============err$err=================");
       return false;
     }
   }

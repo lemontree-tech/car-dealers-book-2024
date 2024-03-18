@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lt_car_dealers_book_2024/ui/shared/messages/get_new_text_dialog.dart';
 
 import 'tabs/recent_screen.dart';
 import 'tabs/by_date_view.dart';
@@ -13,7 +14,7 @@ import './add_images_screen.dart';
 import './setting_drawer.dart';
 // import '../shared/messages/get_new_text_dialog.dart';
 import '../../utils/image_picker_from_phone.dart';
-// import '../../locator.dart';
+import '../../locator.dart';
 
 class TabsSreen extends StatefulWidget {
   const TabsSreen({super.key});
@@ -31,11 +32,9 @@ class _TabsSreenState extends State<TabsSreen>
   ];
 
   late TabController _tabController;
-  final TextEditingController _searchTextController = TextEditingController();
+
   final TextEditingController _newFolderTextController =
       TextEditingController();
-  // final SearchResultViewModel _searchResultViewModel =
-  //     locator<SearchResultViewModel>();
   var _isLoadingImageAsstes = false;
 
   @override
@@ -50,7 +49,7 @@ class _TabsSreenState extends State<TabsSreen>
   @override
   void dispose() {
     _tabController.dispose();
-    _searchTextController.dispose();
+    // _searchTextController.dispose();
     _newFolderTextController.dispose();
     super.dispose();
   }
@@ -82,13 +81,7 @@ class _TabsSreenState extends State<TabsSreen>
     }
   }
 
-  // Future<void> makeNewSearch(BuildContext context) async {
-  //   final searchString = await getNewTextDialog(context, _searchTextController,
-  //       title: '搜尋', contentLabel: '搜尋名稱：', confirmButtonString: '搜尋');
 
-  //   await _searchResultViewModel.newSearch(searchString);
-  //   setState(() {});
-  //   }
 
   @override
   Widget build(BuildContext context) {
@@ -138,11 +131,7 @@ class _TabsSreenState extends State<TabsSreen>
                 ],
               )
             : _tabController.index == 2
-                ? FloatingActionButton(
-                    child: const Icon(Icons.search),
-                    // onPressed: () async => makeNewSearch(context),
-                    onPressed: () {},
-                  )
+                ? null
                 : null,
       ),
     );
