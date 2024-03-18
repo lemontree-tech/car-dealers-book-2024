@@ -7,6 +7,7 @@ import 'ui/views/splash_screen.dart';
 import 'ui/views/auth_screen.dart';
 import 'ui/views/image_detail_screen.dart';
 import 'ui/views/by_date_detail_view.dart';
+import 'core/viewmodels/search_result_view_model.dart';
 
 import 'locator.dart';
 

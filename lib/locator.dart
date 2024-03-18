@@ -30,9 +30,9 @@ export 'core/services/database_service.dart';
 export 'core/viewmodels/setting_view_model.dart';
 export 'core/viewmodels/recent_view_model.dart';
 export 'core/viewmodels/by_date_view_model.dart';
-export 'core/viewmodels/add_images_view_model.dart';
+// export 'core/viewmodels/add_images_view_model.dart';
 export 'core/viewmodels/by_date_detail_view_model.dart';
-// export 'core/viewmodels/search_result_view_model.dart';
+export 'core/viewmodels/search_result_view_model.dart';
 // export 'core/viewmodels/image_detail_view_model.dart';
 // export 'core/viewmodels/list_all_zips_view_model.dart';
 
@@ -57,8 +57,8 @@ void setupLocator() {
   locator.registerLazySingleton<AddImagesViewModel>(() => AddImagesViewModel());
   locator.registerLazySingleton<ByDateDetailViewModel>(
       () => ByDateDetailViewModel());
-  // locator.registerLazySingleton<SearchResultViewModel>(
-  //     () => SearchResultViewModel());
+  locator.registerLazySingleton<SearchResultViewModel>(
+      () => SearchResultViewModel());
   // locator.registerLazySingleton<ImageDetailViewModel>(
   //     () => ImageDetailViewModel());
   // locator.registerLazySingleton<ListAllZipsViewModel>(
