@@ -58,14 +58,14 @@ class _TabsSreenState extends State<TabsSreen>
       {bool isCamera = false}) async {
     File? imageFile = await loadAsset(isCamera: isCamera);
     if (!mounted) return;
-    List<Uint8List> imageBytes = [];
+    Uint8List imageBytes = Uint8List(0);
 
     setState(() {
       _isLoadingImageAsstes = true;
     });
 
     if (imageFile != null) {
-      imageBytes.add(loadImageFromFile(imageFile));
+      imageBytes = loadImageFromFile(imageFile);
     }
 
     setState(() {

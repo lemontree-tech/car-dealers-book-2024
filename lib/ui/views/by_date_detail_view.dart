@@ -37,7 +37,7 @@ class _ByDateDetailViewState extends State<ByDateDetailView> {
                 '只顯示 50 個內容',
                 style: Theme.of(context)
                     .textTheme
-                    .caption
+                    .bodySmall
                     ?.copyWith(fontStyle: FontStyle.italic),
               ),
             ),

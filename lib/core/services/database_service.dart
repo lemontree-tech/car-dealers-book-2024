@@ -98,35 +98,34 @@ class DataBaseService {
     required String pic,
     required DateTime date,
   }) async {
-    return;
 
-    // _markDirty();
+    _markDirty();
 
-    // final Map<String, dynamic> data = {
-    //   "image_id": imageId,
-    //   "image_name": imageName,
-    //   "image_url": imageUrl,
-    //   "license": license,
-    //   "pic": pic,
-    //   "search_array": _getSearchArray(imageName) + _getSearchArray(license),
-    //   "date": Timestamp.fromDate(date),
-    //   "created_at": Timestamp.now(),
-    //   'deleted': false,
-    // };
+    final Map<String, dynamic> data = {
+      "image_id": imageId,
+      "image_name": imageName,
+      "image_url": imageUrl,
+      "license": license,
+      "pic": pic,
+      "search_array": _getSearchArray(imageName) + _getSearchArray(license),
+      "date": Timestamp.fromDate(date),
+      "created_at": Timestamp.now(),
+      'deleted': false,
+    };
 
-    // try {
-    //   // Try to upload info to Firestore
-    //   await FirebaseFirestore.instance
-    //       .collection('images')
-    //       .doc(imageId) // Updated from .document(imageId)
-    //       .set(data);
-    // } catch (err) {
-    //   await FirebaseFirestore.instance
-    //       .collection('images')
-    //       .doc(imageId) // Updated from .document(imageId)
-    //       .set({'deleted': true});
-    //   rethrow;
-    // }
+    try {
+      // Try to upload info to Firestore
+      await FirebaseFirestore.instance
+          .collection('images')
+          .doc(imageId) // Updated from .document(imageId)
+          .set(data);
+    } catch (err) {
+      await FirebaseFirestore.instance
+          .collection('images')
+          .doc(imageId) // Updated from .document(imageId)
+          .set({'deleted': true});
+      rethrow;
+    }
   }
 
   Future<void> editImage(ImageItem image) async {

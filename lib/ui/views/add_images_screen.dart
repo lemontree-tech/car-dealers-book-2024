@@ -12,23 +12,23 @@ class AddImagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Uint8List> images = ModalRoute.of(context)!.settings.arguments as List<Uint8List>;
+    final Uint8List image = ModalRoute.of(context)!.settings.arguments as Uint8List;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('上傳相片'),
         ),
-        body: AddImageWidget(images),
+        body: AddImageWidget(image),
       ),
     );
   }
 }
 
 class AddImageWidget extends StatefulWidget {
-  final List<Uint8List> _images;
+  final Uint8List _image;
 
-  const AddImageWidget(this._images, {super.key});
+  const AddImageWidget(this._image, {super.key});
 
   @override
   State<AddImageWidget> createState() => _AddImageWidgetState();
@@ -44,31 +44,32 @@ class _AddImageWidgetState extends State<AddImageWidget> {
 
   bool isSubmitting = false;
 
-  // Future<void> _sumbitForm(BuildContext context) async {
-  //   setState(() {
-  //     isSubmitting = true;
-  //   });
+  Future<void> _sumbitForm(BuildContext context) async {
+    setState(() {
+      isSubmitting = true;
+    });
 
-  //   final bool success = await _addImagesViewModel.uploadImagesToFirebase(
-  //     imagesByte: widget._images,
-  //     imageName: _nameController.text,
-  //     license: _licenseController.text,
-  //     pic: _picController.text,
-  //     date: "${_dateController.text} ${DateTime.now().toString().split(' ')[1]}",
-  //   );
+    final bool success = await _addImagesViewModel.uploadImageToFirebase(
+      imageByte: widget._image,
+      imageName: _nameController.text,
+      license: _licenseController.text,
+      pic: _picController.text,
+      date: "${_dateController.text} ${DateTime.now().toString().split(' ')[1]}",
+    );
 
-  //   if (success == true) Navigator.of(context).pop(true);
-  //   if (success == false) {
-  //     // ignore: use_build_context_synchronously
-  //     showErrorDialog(context, [_addImagesViewModel.errorMessage]);
-  //   }
+    // ignore: use_build_context_synchronously
+    if (success == true) Navigator.of(context).pop(true);
+    if (success == false) {
+      // ignore: use_build_context_synchronously
+      showErrorDialog(context, [_addImagesViewModel.errorMessage]);
+    }
 
-  //   if (mounted) {
-  //     setState(() {
-  //       isSubmitting = false;
-  //     });
-  //   }
-  // }
+    if (mounted) {
+      setState(() {
+        isSubmitting = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +80,12 @@ class _AddImageWidgetState extends State<AddImageWidget> {
             height: MediaQuery.of(context).size.height * 0.4,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: widget._images.length,
+              itemCount: 1,
               itemBuilder: (ctx, index) {
                 return SizedBox(
                   width: double.infinity,
                   child:
-                      Image.memory(widget._images[index], fit: BoxFit.contain),
+                      Image.memory(widget._image, fit: BoxFit.contain),
                 );
               },
             ),
@@ -148,8 +149,8 @@ class _AddImageWidgetState extends State<AddImageWidget> {
                         child: const Text(
                           '上傳相片',
                         ),
-                        // onPressed: () async => await _sumbitForm(context),
-                        onPressed: () {},
+                        onPressed: () async => await _sumbitForm(context),
+                        // onPressed: () {},
                       ),
               ],
             ),
