@@ -7,7 +7,7 @@ import 'ui/views/splash_screen.dart';
 import 'ui/views/auth_screen.dart';
 import 'ui/views/image_detail_screen.dart';
 import 'ui/views/by_date_detail_view.dart';
-import 'core/viewmodels/search_result_view_model.dart';
+import 'ui/views/list_all_zips_view.dart';
 
 import 'locator.dart';
 
@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
           AddImagesScreen.routeName: (ctx) => const AddImagesScreen(),
           ImageDetailScreen.routeName: (ctx) => const ImageDetailScreen(),
           ByDateDetailView.routeName: (ctx) => const ByDateDetailView(),
+          ListAllZipsView.routeName: (ctx) => ListAllZipsView(),
 
       },
     );

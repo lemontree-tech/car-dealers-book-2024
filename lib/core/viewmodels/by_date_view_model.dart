@@ -12,18 +12,6 @@ class ByDateViewModel extends BaseModel {
   // DateTime currentDate;
   int maxDaysToFetch = 30;
   bool get dataClean => _dataBaseService.isThumbNailsClean;
-  // bool get doneFetching => currentDate == null
-  //     ? false
-  //     : _dataBaseService.today.difference(currentDate).inDays + 1 >=
-  //         maxDaysToFetch; // today.diff(tmr) + 1 = 2
-
-  // Future<void> fetchThumbNails(int days) async {
-  //   await this.blockingFunctionCall(() async {
-  //     await _dataBaseService.fetchThumbNails(days);
-  //     currentDate = _dataBaseService.today
-  //         .add(Duration(days: -(days - 1))); // days = 1, currentDate = today
-  //   });
-  // }
   Future<void> fetch30Future30PastThumbNails() async {
     final List<DateTime> days = List.generate(60, (index) {
       return thirtyDaysAgo.add(Duration(days: index));
