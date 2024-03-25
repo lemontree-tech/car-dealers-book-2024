@@ -8,33 +8,25 @@ class DataBaseService {
   bool isRecentImagesClean = false;
   List<ImageItem> _recentImageItems = [];
   List<ImageItem> get recentImageItems => [..._recentImageItems];
-  // Future<List<ImageItem>> fetch100ImageItems() async {
-  //   isRecentImagesClean = true;
-  //   _recentImageItems = (await Firestore.instance
-  //           .collection('images')
-  //           .limit(100)
-  //           .orderBy("date", descending: true)
-  //           .where('deleted', isEqualTo: false)
-  //           .getDocuments())
-  //       .documents
-  //       .map((e) => ImageItem.fromApiJson(e.data))
-  //       .toList();
-  //   return recentImageItems;
-  // }
   Future<List<ImageItem>> fetch100ImageItems() async {
     isRecentImagesClean = true;
-    final querySnapshot = await FirebaseFirestore.instance
-        .collection('images')
-        .where('deleted', isEqualTo: false)
-        .orderBy('date', descending: true)
-        .limit(100)
-        .get();
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('images')
+          .where('deleted', isEqualTo: false)
+          .orderBy('date', descending: true)
+          .limit(100)
+          .get();
 
-    _recentImageItems = querySnapshot.docs
-        .map((doc) => ImageItem.fromApiJson(doc.data()))
-        .toList();
+      _recentImageItems = querySnapshot.docs
+          .map((doc) => ImageItem.fromApiJson(doc.data()))
+          .toList();
 
-    return _recentImageItems;
+      return _recentImageItems;
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 
   // by date details View
@@ -78,17 +70,6 @@ class DataBaseService {
         .toList();
   }
 
-  Future<List<ImageItem>> getAll() async {
-    final querySnapshot = await FirebaseFirestore.instance
-        .collection('images')
-        .where('deleted', isEqualTo: false)
-        .get();
-
-    return querySnapshot.docs
-        .map((doc) => ImageItem.fromApiJson(doc.data()))
-        .toList();
-  }
-
   // upload
   Future<void> uploadImageInfo({
     required String imageId,
@@ -98,63 +79,59 @@ class DataBaseService {
     required String pic,
     required DateTime date,
   }) async {
-    return;
+    _markDirty();
 
-    // _markDirty();
+    final Map<String, dynamic> data = {
+      "image_id": imageId,
+      "image_name": imageName,
+      "image_url": imageUrl,
+      "license": license,
+      "pic": pic,
+      "search_array": _getSearchArray(imageName) + _getSearchArray(license),
+      "date": Timestamp.fromDate(date),
+      "created_at": Timestamp.now(),
+      'deleted': false,
+    };
 
-    // final Map<String, dynamic> data = {
-    //   "image_id": imageId,
-    //   "image_name": imageName,
-    //   "image_url": imageUrl,
-    //   "license": license,
-    //   "pic": pic,
-    //   "search_array": _getSearchArray(imageName) + _getSearchArray(license),
-    //   "date": Timestamp.fromDate(date),
-    //   "created_at": Timestamp.now(),
-    //   'deleted': false,
-    // };
-
-    // try {
-    //   // Try to upload info to Firestore
-    //   await FirebaseFirestore.instance
-    //       .collection('images')
-    //       .doc(imageId) // Updated from .document(imageId)
-    //       .set(data);
-    // } catch (err) {
-    //   await FirebaseFirestore.instance
-    //       .collection('images')
-    //       .doc(imageId) // Updated from .document(imageId)
-    //       .set({'deleted': true});
-    //   rethrow;
-    // }
+    try {
+      // Try to upload info to Firestore
+      await FirebaseFirestore.instance
+          .collection('images')
+          .doc(imageId) // Updated from .document(imageId)
+          .set(data);
+    } catch (err) {
+      await FirebaseFirestore.instance
+          .collection('images')
+          .doc(imageId) // Updated from .document(imageId)
+          .set({'deleted': true});
+      rethrow;
+    }
   }
 
   Future<void> editImage(ImageItem image) async {
-    return ;
-    // _markDirty();
-    // final data = {
-    //   'image_name': image.imageName,
-    //   'license': image.license,
-    //   'pic': image.pic,
-    //   'date': Timestamp.fromDate(image.date),
-    //   'search_array':
-    //       _getSearchArray(image.imageName) + _getSearchArray(image.license),
-    // };
-    // await FirebaseFirestore.instance
-    //     .collection('images')
-    //     .doc(image.id) // Updated from .document(image.id)
-    //     .update(data); // Updated from .updateData(data)
+    _markDirty();
+    final data = {
+      'image_name': image.imageName,
+      'license': image.license,
+      'pic': image.pic,
+      'date': Timestamp.fromDate(image.date),
+      'search_array':
+          _getSearchArray(image.imageName) + _getSearchArray(image.license),
+    };
+    await FirebaseFirestore.instance
+        .collection('images')
+        .doc(image.id) // Updated from .document(image.id)
+        .update(data); // Updated from .updateData(data)
   }
 
   Future<void> deleteImageById(String imageId) async {
-    return ;
-  //   _markDirty();
-  //   await FirebaseFirestore.instance
-  //       .collection('images')
-  //       .doc(imageId) // Updated from .document(imageId)
-  //       .set({
-  //     'deleted': true
-  //   }); // Kept as .set() since you're setting 'deleted' to true
+    _markDirty();
+    await FirebaseFirestore.instance
+        .collection('images')
+        .doc(imageId) // Updated from .document(imageId)
+        .set({
+      'deleted': true
+    }); // Kept as .set() since you're setting 'deleted' to true
   }
 
   void _markDirty() {

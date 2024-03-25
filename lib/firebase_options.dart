@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -58,5 +55,14 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1056972719660',
     projectId: 'car-dealer-app-development',
     storageBucket: 'car-dealer-app-development.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyC6yks6TuF-1ofBe6HgqWLn9haGfKcyqt8',
+    appId: '1:1056972719660:ios:ae38be715a42ba9dc7f389',
+    messagingSenderId: '1056972719660',
+    projectId: 'car-dealer-app-development',
+    storageBucket: 'car-dealer-app-development.appspot.com',
+    iosBundleId: 'com.lt.motordealerphotodrive',
   );
 }

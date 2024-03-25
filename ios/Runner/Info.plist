@@ -52,5 +52,7 @@
 	<string>The app requires access to the camera</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The app requires access to the microphone</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>The app requires write access to the photo library</string>
 </dict>
 </plist>

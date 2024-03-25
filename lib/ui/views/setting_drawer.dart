@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../locator.dart';
 import '../shared/confirm_action_dialog.dart';
-// import './list_all_zips_view.dart';
+import './list_all_zips_view.dart';
 
 class SettingDrawer extends StatefulWidget {
   const SettingDrawer({super.key});
@@ -40,8 +40,8 @@ class _SettingDrawerState extends State<SettingDrawer> {
                 ? const CircularProgressIndicator()
                 : const Icon(Icons.account_circle),
             title: const Text('匯出所有檔案'),
-            onTap: (){},
-            // onTap: isLoading ? null : ()  =>  Navigator.of(context).popAndPushNamed(ListAllZipsView.routeName),
+            // onTap: (){},
+            onTap: isLoading ? null : ()  =>  Navigator.of(context).popAndPushNamed(ListAllZipsView.routeName),
           ),
           ListTile(
             onTap: () async {

@@ -21,11 +21,11 @@ class ImageItem {
 
   factory ImageItem.fromApiJson(Map<String, dynamic> json) {
     final result = ImageItem(
-      id: json['image_id'],
-      imageName: json['image_name'],
-      imageUrl: json['image_url'],
-      license: json['license'],
-      pic: json['pic'],
+      id: json['image_id'] ?? "",
+      imageName: json['image_name'] ?? "",
+      imageUrl: json['image_url'] ?? "",
+      license: json['license'] ?? "",
+      pic: json['pic'] ?? "",
       date: (json['date'] as Timestamp).toDate(),
       createdAt: (json['created_at'] as Timestamp).toDate(),
     );

@@ -47,7 +47,12 @@ dependencies:
   firebase_auth: ^4.17.5
   firebase_storage: ^11.6.6
   path_provider: ^2.1.2
-
+  # image_downloader: ^0.31.0
+  image_gallery_saver: '^2.0.3'
+  dio: ^5.4.1
+  cloud_functions: ^4.6.9
+  share_plus: ^8.0.2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

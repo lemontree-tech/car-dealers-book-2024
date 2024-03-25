@@ -5,6 +5,10 @@ import 'dart:typed_data';
 // import 'package:image_downloader/image_downloader.dart';
 // import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
+
+import 'package:dio/dio.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+
 // import 'package:save_in_gallery/save_in_gallery.dart';
 
 // Future<bool> saveImageFromUrl(String url, String imageName) async {
@@ -23,16 +27,26 @@ import 'package:flutter/services.dart';
 //   }
 // }
 
+_saveNetworkImage(String url) async {
+  var response =
+      await Dio().get(url, options: Options(responseType: ResponseType.bytes));
+  final result = await ImageGallerySaver.saveImage(
+      Uint8List.fromList(response.data),
+      quality: 60,
+      name: "hello");
+
+  print(result);
+  return result;
+}
+
 Future<bool> saveImageToGallery(String url, String imageStoreId) async {
   try {
     // Saved with this method.
-    // var imageId = await ImageDownloader.downloadImage(url);
-    return false;
-    // if (imageId == null) {
-    //   return false;
-    // }
-    // return true;
-
+    var imageId = await _saveNetworkImage(url);
+    if (imageId == null) {
+      return false;
+    }
+    return true;
   } on PlatformException catch (error) {
     print(error);
     return false;
