@@ -27,13 +27,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>The app requires access to the camera</string>
+	<string>The app requires access to the camera, for users to take photo documents and upload</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>The app requires access to the microphone</string>
+	<string>The app requires access to the microphone, for the camera library requirement</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>The app requires write access to the photo library</string>
+	<string>The app requires write access to the photo library, for users to download images from the cloud store</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>The app requires access to the photo library</string>
+	<string>The app requires access to the photo library, for users to choose photos from gallery and upload</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
